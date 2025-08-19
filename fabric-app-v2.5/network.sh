@@ -10,7 +10,7 @@
 # peer each, and a single node Raft ordering service. Users can also use this
 # script to create a channel deploy a chaincode on the channel
 #
-# prepending $PWD/../bin to PATH to ensure we are picking up the correct binaries
+# prepending $PWD/./bin to PATH to ensure we are picking up the correct binaries
 # this may be commented out to resolve installed version of tools if desired
 #
 # However using PWD in the path has the side effect that location that
@@ -18,7 +18,7 @@
 # this script is actually in and infer location from there. (putting first)
 
 ROOTDIR=$(cd "$(dirname "$0")" && pwd)
-export PATH=${ROOTDIR}/../bin:${PWD}/../bin:$PATH
+export PATH=${ROOTDIR}/./bin:${PWD}/./bin:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
 export VERBOSE=false
 
@@ -63,7 +63,7 @@ function checkPrereqs() {
   ## Check if your have cloned the peer binaries and configuration files.
   peer version > /dev/null 2>&1
 
-  if [[ $? -ne 0 || ! -d "../config" ]]; then
+  if [[ $? -ne 0 || ! -d "./config" ]]; then
     errorln "Peer binary and configuration files not found.."
     errorln
     errorln "Follow the instructions in the Fabric docs to install the Fabric Binaries:"
@@ -386,7 +386,7 @@ function packageChaincode() {
 ## Call the script to list installed and committed chaincode on a peer
 function listChaincode() {
 
-  export FABRIC_CFG_PATH=${PWD}/../config
+  export FABRIC_CFG_PATH=${PWD}/config
 
   . scripts/envVar.sh
   . scripts/ccutils.sh
@@ -404,7 +404,7 @@ function listChaincode() {
 ## Call the script to invoke 
 function invokeChaincode() {
 
-  export FABRIC_CFG_PATH=${PWD}/../config
+  export FABRIC_CFG_PATH=${PWD}/config
 
   . scripts/envVar.sh
   . scripts/ccutils.sh
@@ -418,7 +418,7 @@ function invokeChaincode() {
 ## Call the script to query chaincode 
 function queryChaincode() {
 
-  export FABRIC_CFG_PATH=${PWD}/../config
+  export FABRIC_CFG_PATH=${PWD}/config
   
   . scripts/envVar.sh
   . scripts/ccutils.sh
